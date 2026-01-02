@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>友情大考驗</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Helvetica', Arial, sans-serif;
+        }
+        body {
+            background: #f5f6f7;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #1d2129;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 24px;
+        }
+        .question {
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+        .question:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        .question-title {
+            font-size: 18px;
+            color: #1d2129;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .option {
+            background: #f8f9fa;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 12px 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .option:hover {
+            background: #f0f2f5;
+            border-color: #ccc;
+        }
+        .option.selected {
+            background: #e8f0fe;
+            border-color: #4267b2;
+            color: #4267b2;
+            font-weight: 600;
+        }
+        .btn {
+            background: #4267b2;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 12px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            margin: 20px auto;
+            display: block;
+        }
+        .btn:hover {
+            background: #365899;
+        }
+        .result {
+            margin-top: 30px;
+            padding: 20px;
+            border-radius: 8px;
+            display: none;
+        }
+        .correct {
+            color: #28a745;
+            font-weight: 600;
+        }
+        .incorrect {
+            color: #dc3545;
+            font-weight: 600;
+        }
+        .question-feedback {
+            margin-top: 10px;
+            font-size: 14px;
+            display: none;
+        }
+        .reset-btn {
+            background: #ebedf0;
+            color: #1d2129;
+            margin-top: 15px;
+        }
+        .reset-btn:hover {
+            background: #d8dfea;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>友情大考驗（15題選擇題）</h1>
+        
+        <!-- 題目1 -->
+        <div class="question" data-correct="B">
+            <div class="question-title">1. Hayley和mavisss約定在哪裡集合看電影？</div>
+            <div class="options">
+                <div class="option" data-value="A">A. 尖沙咀海運大廈</div>
+                <div class="option" data-value="B">B. 沙田MTR站</div>
+                <div class="option" data-value="C">C. 紅磡體育館</div>
+                <div class="option" data-value="D">D. 荃灣廣場</div>
+            </div>
+            <div class="question-feedback"></div>
+        </div>
+
+        <!-- 題目2 -->
+        <div class="question" data-correct="C">
+            <div class="question-title">2. 兩人計劃看完電影後去哪裡？</div>
+            <div class="options">
+                <div class="option" data-value="A">A. 銅鑼灣時代廣場</div>
+                <div class="option" data-value="B">B. 旺角朗豪坊</div>
+                <div class="option" data-value="C">C. K11</div>
+                <div class="option" data-value="D">D. 中環置地廣場</div>
+            </div>
+            <div class="question-feedback"></div>
+        </div>
+
+        <!-- 題目3 -->
+        <div class="question" data-correct="A">
+            <div class="question-title">3. 電影票每張多少錢？</div>
+            <div class="options">
+                <div class="option" data-value="A">A. 75元</div>
+                <div class="option" data-value="B">B. 65元</div>
+                <div class="option" data-value="C">C. 85元</div>
+                <div class="option" data-value="D">D. 95元</div>
+            </div>
+            <div class="question-feedback"></div>
+        </div>
+
+        <!-- 題目4 -->
+        <div class="question" data-correct="D">
+            <div class="question-title">4. 兩人聊天中提到的「麥提莎」是什麼梗？</div>
+            <div class="options">
+                <div class="option" data-value="A">A. 某款化妝品</div>
+                <div class="option" data-value="B">B. 學校老師的綽號</div>
+                <div class="option" data-value="C">C. 網絡流行歌曲</div>
+                <div class="option" data-value="D">D. 類似NPC的廣告台詞</div>
+            </div>
+            <div class="question-feedback"></div>
+        </div>
+
+        <!-- 題目5 -->
+        <div class="question" data-correct="B">
+            <div class="question-title">5. Hayley說自己家人住在香港哪個地區？</div>
+            <div class="options">
+                <div class="option" data-value="A">A. 沙田</div>
+                <div class="option" data-value="B">B. 旺角</div>
+                <div class="option" data-value="C">C. 油麻地</div>
+                <div class="option" data-value="D">D. 深水埗</div>
+            </div>
+            <div class="question-feedback"></div>
+        </div>
+
+        <!-- 題目6 -->
+        <div class="question" data-correct="C">
+            <div class="question-title">6. 兩人計劃參觀的M+博物館有什麼亮點？</div>
+            <div class="options">
+                <div class="option" data-value="A">A. 免費入場</div>
+                <div class="option" data-value="B">B. 有明星見面會</div>
+                <div class="option" data-value="C">C. 可以看海景和聖誕裝飾</div>
+                <div class="option" data-value="D">D. 有KPOP專題展覽</div>
+            </div>
+            <div class="question-feedback"></div>
+        </div>
+
+        <!-- 題目7 -->
+        <div class="question" data-correct="A">
+            <div class="question-title">7. mavisss的媽媽因為什麼事情很開心？</div>
+            <div class="options">
+                <div class="option" data-value="A">A. czy帶了第二張yes card回家</div>
+                <div class="option" data-value="B">B. 電影票買到優惠價</div>
+                <div class="option" data-value="C">C. 收到聖誕禮物</div>
+                <div class="option" data-value="D">D. 女兒考試成績好</div>
+            </div>
+            <div class="question-feedback"></div>
+        </div>
+
+        <!-- 題目8 -->
+        <div class="question" data-correct="D">
+            <div class="question-title">8. 兩人聊天中反覆提到的「6🤷🏻7」是什麼含義？</div>
+            <div class="options">
+                <div class="option" data-value="A">A. 考試分數</div>
+                <div class="option" data-value="B">B. 電影場次時間</div>
+                <div class="option" data-value="C">C. 購物金額</div>
+                <div class="option" data-value="D">D. 專屬梗/暗號</div>
+            </div>
+            <div class="question-feedback"></div>
+        </div>
+
+        <!-- 題目9 -->
+        <div class="question" data-correct="B">
+            <div class="question-title">9. Hayley曾經抱過的「愛莎燈籠」被兩人用來開什麼玩笑？</div>
+            <div class="options">
+                <div class="option" data-value="A">A. 燈籠質量不好</div>
+                <div class="option" data-value="B">B. 算不算抱過alvis chan</div>
+                <div class="option" data-value="C">C. 聖誕裝飾不好看</div>
+                <div class="option" data-value="D">D. 價格太貴</div>
+            </div>
+            <div class="question-feedback"></div>
+        </div>
+
+        <!-- 題目10 -->
+        <div class="question" data-correct="C">
+            <div class="question-title">10. 兩人聊天中提到的KPOP團體不包括以下哪個？</div>
+            <div class="options">
+                <div class="option" data-value="A">A. BTS</div>
+                <div class="option" data-value="B">B. LE SSERAFIM</div>
+                <div class="option" data-value="C">C. BLACKPINK</div>
+                <div class="option" data-value="D">D. TWICE</div>
+            </div>
+            <div class="question-feedback"></div>
+        </div>
+
+        <!-- 題目11 -->
+        <div class="question" data-correct="A">
+            <div class="question-title">11. mavisss因為什麼事情「胃痛到急屎」？</div>
+            <div class="options">
+                <div class="option" data-value="A">A. 和Hayley聊天笑得太開心</div>
+                <div class="option" data-value="B">B. 吃了不新鮮的食物</div>
+                <div class="option" data-value="C">C. 考試壓力太大</div>
+                <div class="option" data-value="D">D. 運動過度</div>
+            </div>
+            <div class="question-feedback"></div>
+        </div>
+
+        <!-- 題目12 -->
+        <div class="question" data-correct="B">
+            <div class="question-title">12. 兩人聊天中創造的「田狗」梗，核心是結合了什麼元素？</div>
+            <div class="options">
+                <div class="option" data-value="A">A. 人名字+網絡用語</div>
+                <div class="option" data-value="B">B. 地名+搞笑暱稱</div>
+                <div class="option" data-value="C">C. 歌曲名+表情包</div>
+                <div class="option" data-value="D">D. 明星名字+食物名稱</div>
+            </div>
+            <div class="question-feedback"></div>
+        </div>
+
+        <!-- 題目13 -->
+        <div class="question" data-correct="C">
+            <div class="question-title">13. mavisss是Hayley的？</div>
+            <div class="options">
+                <div class="option" data-value="A">A. 專屬的歐巴</div>
+                <div class="option" data-value="B">B. 爺爺</div>
+                <div class="option" data-value="C">C. 姐姐</div>
+                <div class="option" data-value="D">D. 土豆</div>
+            </div>
+            <div class="question-feedback"></div>
+        </div>
+
+        <!-- 題目14 -->
+        <div class="question" data-correct="D">
+            <div class="question-title">14. 兩人約定的集合時間接近以下哪個？</div>
+            <div class="options">
+                <div class="option" data-value="A">A. 09:30</div>
+                <div class="option" data-value="B">B. 10:15</div>
+                <div class="option" data-value="C">C. 11:00</div>
+                <div class="option" data-value="D">D. 11:45</div>
+            </div>
+            <div class="question-feedback"></div>
+        </div>
+
+        <!-- 修正後的題目15（gm番茄梗） -->
+        <div class="question" data-correct="A">
+            <div class="question-title">15. 兩人聊天中專屬的「gm番茄」梗，是怎麼誕生的？</div>
+            <div class="options">
+                <div class="option" data-value="A">A. hayley把馬sir的頭畫在蕃茄上</div>
+                <div class="option" data-value="B">B. Mavisss吃了一個gm番茄</div>
+                <div class="option" data-value="C">C. 電影經典畫面</div>
+                <div class="option" data-value="D">D. 田田用gm番茄作為頭像</div>
+            </div>
+            <div class="question-feedback"></div>
+        </div>
+
+        <button class="btn" id="submit">提交答案</button>
+        <div class="result" id="result"></div>
+        <button class="btn reset-btn" id="reset" style="display: none;">重新作答</button>
+    </div>
+
+    <script>
+        // 選擇選項功能
+        const options = document.querySelectorAll('.option');
+        options.forEach(option => {
+            option.addEventListener('click', function() {
+                // 取消同一題目的其他選擇
+                const question = this.closest('.question');
+                question.querySelectorAll('.option').forEach(opt => {
+                    opt.classList.remove('selected');
+                });
+                // 選擇當前選項
+                this.classList.add('selected');
+                // 隱藏答題反饋
+                const feedback = question.querySelector('.question-feedback');
+                feedback.style.display = 'none';
+            });
+        });
+
+        // 撤銷選擇功能（雙擊撤銷）
+        options.forEach(option => {
+            option.addEventListener('dblclick', function() {
+                this.classList.remove('selected');
+            });
+        });
+
+        // 提交答案
+        const submitBtn = document.getElementById('submit');
+        const resultDiv = document.getElementById('result');
+        const resetBtn = document.getElementById('reset');
+
+        submitBtn.addEventListener('click', function() {
+            let score = 0;
+            const questions = document.querySelectorAll('.question');
+            let hasUnanswered = false;
+            
+            questions.forEach(question => {
+                const selectedOption = question.querySelector('.option.selected');
+                const correctAnswer = question.getAttribute('data-correct');
+                const feedback = question.querySelector('.question-feedback');
+                
+                if (!selectedOption) {
+                    feedback.textContent = '❌ 未選擇答案';
+                    feedback.className = 'question-feedback incorrect';
+                    feedback.style.display = 'block';
+                    hasUnanswered = true;
+                    return;
+                }
+                
+                const selectedValue = selectedOption.getAttribute('data-value');
+                
+                if (selectedValue === correctAnswer) {
+                    score++;
+                    feedback.textContent = '✅ 回答正確！';
+                    feedback.className = 'question-feedback correct';
+                } else {
+                    feedback.textContent = `❌ 回答錯誤，正確答案是：${correctAnswer}`;
+                    feedback.className = 'question-feedback incorrect';
+                }
+                feedback.style.display = 'block';
+            });
+            
+            // 顯示分數
+            resultDiv.style.display = 'block';
+            resultDiv.innerHTML = `<h2>${score}/15 分！</h2>`;
+            if (score === 15) {
+                resultDiv.innerHTML += '<p class="correct">🎉 全對！你完全瞭解這對好友的日常梗～</p>';
+            } else if (score >= 12) {
+                resultDiv.innerHTML += '<p class="correct">👏 超優秀！簡直是好友默契天花板～</p>';
+            } else if (score >= 9) {
+                resultDiv.innerHTML += '<p>😐 不錯喔！再多瞭解點細節就完美啦～</p>';
+            } else if (score >= 6) {
+                resultDiv.innerHTML += '<p>💪 繼續加油！好友默契需要慢慢培養～</p>';
+            } else {
+                resultDiv.innerHTML += '<p class="incorrect">💬 多和朋友聊天，下次一定能進步！</p>';
+            }
+            
+            // 顯示重新作答按鈕
+            submitBtn.style.display = 'none';
+            resetBtn.style.display = 'block';
+        });
+
+        // 重新作答
+        resetBtn.addEventListener('click', function() {
+            options.forEach(option => {
+                option.classList.remove('selected');
+            });
+            document.querySelectorAll('.question-feedback').forEach(feedback => {
+                feedback.style.display = 'none';
+            });
+            resultDiv.style.display = 'none';
+            submitBtn.style.display = 'block';
+            resetBtn.style.display = 'none';
+        });
+    </script>
+</body>
+</html>
